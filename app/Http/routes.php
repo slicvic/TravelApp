@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'SiteController@home');
+Route::get('/', 'AppController@home');

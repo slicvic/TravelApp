@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class SiteController extends Controller
+class AppController extends Controller
 {
     public function home()
     {
