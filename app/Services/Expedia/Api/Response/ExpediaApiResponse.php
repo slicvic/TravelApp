@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Expedia\Api\Response;
 
-class ExpediaApiRawResponse extends ExpediaApiAbstractResponse
+class ExpediaApiResponse extends ExpediaApiAbstractResponse
 {
     /**
      * @var object
