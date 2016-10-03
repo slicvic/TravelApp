@@ -4,7 +4,7 @@ namespace App\Services\Expedia\Api\Response;
 class ExpediaApiResponse extends ExpediaApiAbstractResponse
 {
     /**
-     * @var object
+     * @var stdClass
      */
     public $body;
 }

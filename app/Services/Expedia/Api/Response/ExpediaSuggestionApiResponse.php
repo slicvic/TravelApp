@@ -9,7 +9,7 @@ class ExpediaSuggestionApiResponse extends ExpediaApiAbstractResponse
     public $results;
 
     /**
-     * @var object
+     * @var stdClass
      */
     public $rawResponse;
 }
