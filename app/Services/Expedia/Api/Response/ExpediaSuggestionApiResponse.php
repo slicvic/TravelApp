@@ -7,4 +7,9 @@ class ExpediaSuggestionApiResponse extends ExpediaApiAbstractResponse
      * @var array
      */
     public $results;
+
+    /**
+     * @var ExpediaApiRawResponse
+     */
+    public $rawResponse;
 }

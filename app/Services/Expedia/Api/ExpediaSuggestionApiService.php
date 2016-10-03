@@ -75,16 +75,14 @@ class ExpediaSuggestionApiService
     }
 
     /**
-     * Process response.
+     * Take raw response and extract search results.
      * @param  ExpediaApiRawResponse $rawResponse
      * @return ExpediaSuggestionApiResponse
      */
     protected function processResponse(ExpediaApiRawResponse $rawResponse)
     {
         $response = new ExpediaSuggestionApiResponse();
-        $response->status = $rawResponse->status;
-        $response->rawBody = $rawResponse->rawBody;
-        $response->body = $rawResponse->body;
+        $response->rawResponse = $rawResponse;
         $response->results = [];
 
         if ($rawResponse->status != 200 || !$rawResponse->body) {
