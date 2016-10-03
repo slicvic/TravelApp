@@ -13,7 +13,7 @@ class HomeController extends Controller
     }
     public function index()
     {
-        var_dump($this->expediaSuggestionsApiService->hotels('hilton'));exit;
+        dd($this->expediaSuggestionsApiService->hotels('hilton'));exit;
 
         return view('home');
     }

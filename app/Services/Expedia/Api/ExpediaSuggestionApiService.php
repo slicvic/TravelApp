@@ -2,7 +2,7 @@
 namespace App\Services\Expedia\Api;
 
 use App\Services\Expedia\Api\Response\ExpediaSuggestionApiResponse;
-use App\Services\Expedia\Api\Response\ExpediaApiResponse;
+use App\Services\Expedia\Api\Response\ExpediaApiGenericResponse;
 
 class ExpediaSuggestionApiService
 {
@@ -76,25 +76,15 @@ class ExpediaSuggestionApiService
 
     /**
      * Process response.
-     * @param  ExpediaApiResponse $rawResponse
+     * @param  ExpediaApiGenericResponse $genericResponse
      * @return ExpediaSuggestionApiResponse
      */
-    protected function processResponse(ExpediaApiResponse $rawResponse)
+    protected function processResponse(ExpediaApiGenericResponse $genericResponse)
     {
-        $response = new ExpediaSuggestionApiResponse();
-        $response->status = $rawResponse->status;
-        $response->rawResponse = $rawResponse->body;
-        $response->results = [];
-
-        if ($rawResponse->status != 200 || !$rawResponse->body) {
-            return $response;
-        }
-
-        if ($rawResponse->body->rc != 'OK' || empty($rawResponse->body->sr)) {
-            return $response;
-        }
-
-        $response->results = $rawResponse->body->sr;
+        $response = new ExpediaSuggestionApiResponse(
+            $genericResponse->getStatus(),
+            $genericResponse->getRawBody()
+        );
 
         return $response;
     }
