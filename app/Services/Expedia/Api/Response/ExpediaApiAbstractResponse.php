@@ -8,4 +8,9 @@ abstract class ExpediaApiAbstractResponse
      * @var int
      */
     public $status;
+
+    /**
+     * @var object
+     */
+    public $body;
 }

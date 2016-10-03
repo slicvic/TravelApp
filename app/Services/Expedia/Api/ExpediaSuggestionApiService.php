@@ -75,7 +75,7 @@ class ExpediaSuggestionApiService
     }
 
     /**
-     * Process raw response.
+     * Process response.
      * @param  ExpediaApiRawResponse $rawResponse
      * @return ExpediaSuggestionApiResponse
      */
