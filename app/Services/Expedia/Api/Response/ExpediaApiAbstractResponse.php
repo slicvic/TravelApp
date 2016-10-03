@@ -59,8 +59,8 @@ abstract class ExpediaApiAbstractResponse
     }
 
     /**
-     * Decode json response.
-     * @param  return $jsonResponse
+     * Decode JSON response string.
+     * @param  string $jsonResponse
      * @return stdClass
      */
     private function decodeJsonResponse(string $jsonResponse)

@@ -60,7 +60,7 @@ class ExpediaSuggestionApiService
      * @param  int    $maxResults
      * @return ExpediaSuggestionApiResponse
      */
-    protected function sendRequest(string $resource, string $query, int $maxResults)
+    private function sendRequest(string $resource, string $query, int $maxResults)
     {
         $url = env('EXPEDIA_API_ENDPOINT_SUGGESTIONS_URL') . $resource;
 
@@ -79,7 +79,7 @@ class ExpediaSuggestionApiService
      * @param  ExpediaApiGenericResponse $genericResponse
      * @return ExpediaSuggestionApiResponse
      */
-    protected function processResponse(ExpediaApiGenericResponse $genericResponse)
+    private function processResponse(ExpediaApiGenericResponse $genericResponse)
     {
         $response = new ExpediaSuggestionApiResponse(
             $genericResponse->getStatus(),
