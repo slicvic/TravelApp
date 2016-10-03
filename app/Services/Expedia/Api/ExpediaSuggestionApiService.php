@@ -83,7 +83,7 @@ class ExpediaSuggestionApiService
     {
         $response = new ExpediaSuggestionApiResponse(
             $genericResponse->getStatus(),
-            $genericResponse->getRawBody()
+            $genericResponse->getRawResponse()
         );
 
         return $response;

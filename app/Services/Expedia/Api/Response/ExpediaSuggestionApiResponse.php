@@ -34,14 +34,14 @@ class ExpediaSuggestionApiResponse extends ExpediaApiAbstractResponse
     {
         $this->results = [];
 
-        if ($this->status != 200 || !$this->body) {
+        if ($this->status != 200 || !$this->rawResponseObject) {
             return;
         }
 
-        if ($this->body->rc != 'OK' || empty($this->body->sr)) {
+        if ($this->rawResponseObject->rc != 'OK' || empty($this->rawResponseObject->sr)) {
             return;
         }
 
-        $this->results = $this->body->sr;
+        $this->results = $this->rawResponseObject->sr;
     }
 }

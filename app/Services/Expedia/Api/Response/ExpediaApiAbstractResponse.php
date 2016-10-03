@@ -12,23 +12,23 @@ abstract class ExpediaApiAbstractResponse
     /**
      * @var string
      */
-    protected $rawBody;
+    protected $rawResponse;
 
     /**
      * @var stdClass
      */
-    protected $body;
+    protected $rawResponseObject;
 
     /**
      * Constructor.
      * @param int    $status
-     * @param string $rawBody
+     * @param string $body
      */
-    public function __construct(int $status, string $rawBody)
+    public function __construct(int $status, string $body)
     {
         $this->status = $status;
-        $this->rawBody = $rawBody;
-        $this->body = $this->decodeJsonResponse($rawBody);
+        $this->rawResponse = $body;
+        $this->rawResponseObject = $this->decodeJson($body);
     }
 
     /**
@@ -41,30 +41,30 @@ abstract class ExpediaApiAbstractResponse
     }
 
     /**
-     * Get rawBody.
+     * Get rawResponse.
      * @return string
      */
-    public function getRawBody()
+    public function getRawResponse()
     {
-        return $this->rawBody;
+        return $this->rawResponse;
     }
 
     /**
-     * Get body.
+     * Get rawResponseObject.
      * @return stdClass
      */
-    public function getBody()
+    public function getRawResponseObject()
     {
-        return $this->body;
+        return $this->rawResponseObject;
     }
 
     /**
-     * Decode JSON response string.
-     * @param  string $jsonResponse
+     * Decode a JSON string.
+     * @param  string $json
      * @return stdClass
      */
-    private function decodeJsonResponse(string $jsonResponse)
+    private function decodeJson(string $json)
     {
-        return json_decode($jsonResponse);
+        return json_decode($json);
     }
 }
