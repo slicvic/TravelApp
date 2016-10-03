@@ -20,7 +20,8 @@ class ExpediaApiHttpClient
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($data));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response->body = json_decode(curl_exec($ch));
+        $response->rawBody = curl_exec($ch);
+        $response->body = json_decode($response->rawBody);
         $response->status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 

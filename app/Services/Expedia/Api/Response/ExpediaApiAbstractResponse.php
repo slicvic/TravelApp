@@ -10,6 +10,11 @@ abstract class ExpediaApiAbstractResponse
     public $status;
 
     /**
+     * @var string
+     */
+    public $rawBody;
+
+    /**
      * @var object
      */
     public $body;

@@ -83,6 +83,8 @@ class ExpediaSuggestionApiService
     {
         $response = new ExpediaSuggestionApiResponse();
         $response->status = $rawResponse->status;
+        $response->rawBody = $rawResponse->rawBody;
+        $response->body = $rawResponse->body;
         $response->results = [];
 
         if ($rawResponse->status != 200 || !$rawResponse->body) {
