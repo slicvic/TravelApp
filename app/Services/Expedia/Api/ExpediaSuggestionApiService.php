@@ -82,7 +82,8 @@ class ExpediaSuggestionApiService
     protected function processResponse(ExpediaApiRawResponse $rawResponse)
     {
         $response = new ExpediaSuggestionApiResponse();
-        $response->rawResponse = $rawResponse;
+        $response->status = $rawResponse->status;
+        $response->rawResponse = $rawResponse->body;
         $response->results = [];
 
         if ($rawResponse->status != 200 || !$rawResponse->body) {
