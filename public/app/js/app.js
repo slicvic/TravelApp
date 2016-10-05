@@ -46,7 +46,7 @@ var app = (function(jquery) {
                     '<div>Nothing Found.</div>'
                 ],
                 suggestion: function (data) {
-                    return ['<a>', data.d, '</a>'].join('');
+                    return ['<a href="#">', data.d, '</a>'].join('');
                 }
             }
 
