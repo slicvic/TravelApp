@@ -33,23 +33,22 @@ var app = (function(jquery) {
         });
 
         selectors.regionsTypeaheadInput.typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 1
-        },{
-            source: regionsEngine.ttAdapter(),
-            display: function(datum) {
-                return datum.d;
-            },
-            templates: {
-                empty: [
-                    '<div>Nothing Found.</div>'
-                ],
-                suggestion: function (data) {
-                    return ['<a href="#">', data.d, '</a>'].join('');
+                hint: true,
+                highlight: true,
+                minLength: 1
+            }, {
+                source: regionsEngine.ttAdapter(),
+                display: function(datum) {
+                    return datum.d;
+                },
+                templates: {
+                    empty: [
+                        '<div>Nothing Found.</div>'
+                    ],
+                    suggestion: function (data) {
+                        return ['<a href="#">', data.d, '</a>'].join('');
+                    }
                 }
-            }
-
         }).on('typeahead:selected', function (obj, datum) {
             var self = jquery(this);
 
