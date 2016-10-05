@@ -51,7 +51,8 @@ var app = (function(jquery) {
             }
 
         }).on('typeahead:selected', function (obj, datum) {
-           var self = jquery(this);
+            var self = jquery(this);
+
             if (self.data('store-value')) {
                 jquery(self.data('store-value')).val(datum.id);
             }
