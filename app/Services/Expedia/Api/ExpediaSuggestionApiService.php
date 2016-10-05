@@ -1,10 +1,12 @@
 <?php
 namespace App\Services\Expedia\Api;
 
+use App\Contracts\SuggestionServiceInterface;
+
 use App\Services\Expedia\Api\Response\ExpediaSuggestionApiResponse;
 use App\Services\Expedia\Api\Response\ExpediaApiGenericResponse;
 
-class ExpediaSuggestionApiService
+class ExpediaSuggestionApiService implements SuggestionServiceInterface
 {
     /**
      * @var ExpediaApiHttpClient
@@ -32,12 +34,12 @@ class ExpediaSuggestionApiService
     }
 
     /**
-     * Get regions suggestions.
+     * Get cities suggestions.
      * @param  string  $query
      * @param  integer $maxResults
      * @return ExpediaSuggestionApiResponse
      */
-    public function regions(string $query, int $maxResults = 10)
+    public function cities(string $query, int $maxResults = 10)
     {
         return $this->sendRequest('regions', $query, $maxResults);
     }

@@ -8,8 +8,11 @@
         <meta name="author" content="">
         <link rel="icon" href="">
         <title>Travel App</title>
-        <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/app/css/app.css" rel="stylesheet">
+        @section('stylesheets')
+            <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+            <link href="/app/css/app.css" rel="stylesheet">
+        @show
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -17,28 +20,35 @@
         <![endif]-->
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Travel App</a>
+        @section('header')
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Travel App</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{{ URL::route('home') }}">Home</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ URL::route('home') }}">Home</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
+        @show
         <div class="container">
             @yield('content')
         </div>
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        @section('javascripts')
+            <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+            <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+            <script src="/bower_components/typeahead.js/dist/bloodhound.min.js"></script>
+            <script src="/bower_components/typeahead.js/dist/typeahead.jquery.min.js"></script>
+            <script src="/app/js/app.js"></script>
+        @show
     </body>
 </html>

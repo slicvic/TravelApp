@@ -11,6 +11,15 @@
 |
 */
 
+
+
+
+Route::group(['namespace' => 'Ajax'], function() {
+    Route::get('/ajax/autosuggest/cities', [
+        'uses' => 'AutoSuggestController@cities'
+    ]);
+});
+
 Route::get('/', [
     'as' => 'home', 'uses' => 'HomeController@index'
 ]);
