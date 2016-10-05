@@ -34,12 +34,12 @@ class ExpediaSuggestionApiService implements SuggestionServiceInterface
     }
 
     /**
-     * Get cities suggestions.
+     * Get regions suggestions.
      * @param  string  $query
      * @param  integer $maxResults
      * @return ExpediaSuggestionApiResponse
      */
-    public function cities(string $query, int $maxResults = 10)
+    public function regions(string $query, int $maxResults = 10)
     {
         return $this->sendRequest('regions', $query, $maxResults);
     }

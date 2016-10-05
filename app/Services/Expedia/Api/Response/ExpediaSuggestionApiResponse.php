@@ -17,7 +17,7 @@ class ExpediaSuggestionApiResponse extends ExpediaApiAbstractResponse implements
     {
         parent::__construct($status, $body);
 
-        $this->extractResults();
+        $this->prepareResults();
     }
 
     /**
@@ -30,9 +30,9 @@ class ExpediaSuggestionApiResponse extends ExpediaApiAbstractResponse implements
     }
 
     /**
-     * Extract results from body.
+     * Extract results from raw response and prepare it for client.
      */
-    private function extractResults()
+    private function prepareResults()
     {
         $this->results = [];
 
@@ -45,5 +45,9 @@ class ExpediaSuggestionApiResponse extends ExpediaApiAbstractResponse implements
         }
 
         $this->results = $this->rawResponseObject->sr;
+
+        foreach ($this->results as $data) {
+            $data->d = str_replace(['<B>', '</B>'], ['', ''], $data->d);
+        }
     }
 }

@@ -15,7 +15,7 @@ class AutoSuggestController extends BaseController
         $this->suggestionsService = $suggestionsService;
     }
 
-    public function cities(Request $request)
+    public function regions(Request $request)
     {
         $input = $request->only(['query']);
 
@@ -26,7 +26,7 @@ class AutoSuggestController extends BaseController
             ]);
         }
 
-        $data = $this->suggestionsService->cities($input['query']);
+        $data = $this->suggestionsService->regions($input['query']);
 
         $response = [
             'success' => 1,

@@ -11,6 +11,7 @@
         @section('stylesheets')
             <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
             <link href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+            <link href="/app/css/typeaheadjs.css" rel="stylesheet">
             <link href="/app/css/app.css" rel="stylesheet">
         @show
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
