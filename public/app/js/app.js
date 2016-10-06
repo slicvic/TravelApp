@@ -52,12 +52,12 @@ var app = (function(jquery) {
         }).on('typeahead:selected', function (obj, datum) {
             var self = jquery(this);
 
-            if (self.data('store-value')) {
-                jquery(self.data('store-value')).val(datum.id);
+            if (self.data('value-field')) {
+                jquery(self.data('value-field')).val(datum.id);
             }
 
-            if (self.data('store-label')) {
-                jquery(self.data('store-label')).val(datum.d);
+            if (self.data('label-field')) {
+                jquery(self.data('label-field')).val(datum.d);
             }
         });
     }

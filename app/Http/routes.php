@@ -11,15 +11,14 @@
 |
 */
 
-
-
-
+// Ajax
 Route::group(['namespace' => 'Ajax'], function() {
-    Route::get('/ajax/autosuggest/regions', [
-        'uses' => 'AutoSuggestController@regions'
-    ]);
+    Route::get('/ajax/autosuggest/regions', 'AutoSuggestController@regions');
 });
 
-Route::get('/', [
-    'as' => 'home', 'uses' => 'HomeController@index'
-]);
+// Hotels
+Route::get('/hotels', 'HotelsController@index')->name('hotels.home');
+Route::get('/hotels/search', 'HotelsController@search')->name('hotels.search');
+
+// Home
+Route::get('/', 'HomeController@index')->name('home');
