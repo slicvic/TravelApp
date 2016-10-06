@@ -1,7 +1,7 @@
 <?php
 namespace App\Contracts;
 
-interface SuggestionServiceResponseInterface
+interface SuggestionsServiceResponseInterface
 {
     /**
      * Get results.

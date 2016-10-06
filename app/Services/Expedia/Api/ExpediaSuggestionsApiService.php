@@ -1,12 +1,12 @@
 <?php
 namespace App\Services\Expedia\Api;
 
-use App\Contracts\SuggestionServiceInterface;
+use App\Contracts\SuggestionsServiceInterface;
 
-use App\Services\Expedia\Api\Response\ExpediaSuggestionApiResponse;
+use App\Services\Expedia\Api\Response\ExpediaSuggestionsApiResponse;
 use App\Services\Expedia\Api\Response\ExpediaApiGenericResponse;
 
-class ExpediaSuggestionApiService implements SuggestionServiceInterface
+class ExpediaSuggestionsApiService implements SuggestionsServiceInterface
 {
     /**
      * @var ExpediaApiHttpClient
@@ -26,7 +26,7 @@ class ExpediaSuggestionApiService implements SuggestionServiceInterface
      * Get hotels suggestions.
      * @param  string  $query
      * @param  integer $maxResults
-     * @return ExpediaSuggestionApiResponse
+     * @return ExpediaSuggestionsApiResponse
      */
     public function hotels(string $query, int $maxResults = 10)
     {
@@ -37,7 +37,7 @@ class ExpediaSuggestionApiService implements SuggestionServiceInterface
      * Get regions suggestions.
      * @param  string  $query
      * @param  integer $maxResults
-     * @return ExpediaSuggestionApiResponse
+     * @return ExpediaSuggestionsApiResponse
      */
     public function regions(string $query, int $maxResults = 10)
     {
@@ -48,7 +48,7 @@ class ExpediaSuggestionApiService implements SuggestionServiceInterface
      * Get flights suggestions.
      * @param  string  $query
      * @param  integer $maxResults
-     * @return ExpediaSuggestionApiResponse
+     * @return ExpediaSuggestionsApiResponse
      */
     public function flights(string $query, int $maxResults = 10)
     {
@@ -60,7 +60,7 @@ class ExpediaSuggestionApiService implements SuggestionServiceInterface
      * @param  string $resource
      * @param  string $query
      * @param  int    $maxResults
-     * @return ExpediaSuggestionApiResponse
+     * @return ExpediaSuggestionsApiResponse
      */
     private function sendRequest(string $resource, string $query, int $maxResults)
     {
@@ -79,11 +79,11 @@ class ExpediaSuggestionApiService implements SuggestionServiceInterface
     /**
      * Process response.
      * @param  ExpediaApiGenericResponse $genericResponse
-     * @return ExpediaSuggestionApiResponse
+     * @return ExpediaSuggestionsApiResponse
      */
     private function processResponse(ExpediaApiGenericResponse $genericResponse)
     {
-        $response = new ExpediaSuggestionApiResponse(
+        $response = new ExpediaSuggestionsApiResponse(
             $genericResponse->getStatus(),
             $genericResponse->getRawResponse()
         );

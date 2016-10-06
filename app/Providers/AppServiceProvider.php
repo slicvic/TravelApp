@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\Expedia\Api\ExpediaSuggestionApiService;
+use App\Services\Expedia\Api\ExpediaSuggestionsApiService;
 use App\Services\Expedia\Api\ExpediaApiHttpClient;
-use App\Contracts\SuggestionServiceInterface;
+use App\Contracts\SuggestionsServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +30,8 @@ class AppServiceProvider extends ServiceProvider
             return new ExpediaApiHttpClient();
         });
 
-        $this->app->singleton(SuggestionServiceInterface::class, function($app) {
-            return new ExpediaSuggestionApiService($app->make(ExpediaApiHttpClient::class));
+        $this->app->singleton(SuggestionsServiceInterface::class, function($app) {
+            return new ExpediaSuggestionsApiService($app->make(ExpediaApiHttpClient::class));
         });
     }
 }

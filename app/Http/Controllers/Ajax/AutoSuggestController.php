@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Ajax;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Ajax\BaseController;
-use App\Contracts\SuggestionServiceInterface;
+use App\Contracts\SuggestionsServiceInterface;
 
 class AutoSuggestController extends BaseController
 {
     private $suggestionsService;
 
-    public function __construct(SuggestionServiceInterface $suggestionsService)
+    public function __construct(SuggestionsServiceInterface $suggestionsService)
     {
         $this->suggestionsService = $suggestionsService;
     }
