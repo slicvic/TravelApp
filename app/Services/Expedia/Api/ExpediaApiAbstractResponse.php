@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Expedia\Api\Response;
+namespace App\Services\Expedia\Api;
 
 abstract class ExpediaApiAbstractResponse
 {

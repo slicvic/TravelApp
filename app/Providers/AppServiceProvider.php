@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\Expedia\Api\ExpediaSuggestionsApiService;
+use App\Services\Expedia\Api\Suggestions\ExpediaSuggestionsApiService;
 use App\Services\Expedia\Api\ExpediaApiHttpClient;
 use App\Contracts\SuggestionsServiceInterface;
 

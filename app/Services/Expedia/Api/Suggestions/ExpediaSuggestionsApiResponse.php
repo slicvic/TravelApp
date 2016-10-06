@@ -1,7 +1,8 @@
 <?php
-namespace App\Services\Expedia\Api\Response;
+namespace App\Services\Expedia\Api\Suggestions;
 
 use App\Contracts\SuggestionsServiceResponseInterface;
+use App\Services\Expedia\Api\ExpediaApiAbstractResponse;
 
 class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse implements SuggestionsServiceResponseInterface
 {

@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Expedia\Api;
 
-use App\Services\Expedia\Api\Response\ExpediaApiGenericResponse;
+use App\Services\Expedia\Api\ExpediaApiGenericResponse;
 
 class ExpediaApiHttpClient
 {

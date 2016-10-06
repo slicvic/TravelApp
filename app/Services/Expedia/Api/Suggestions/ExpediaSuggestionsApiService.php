@@ -1,10 +1,10 @@
 <?php
-namespace App\Services\Expedia\Api;
+namespace App\Services\Expedia\Api\Suggestions;
 
 use App\Contracts\SuggestionsServiceInterface;
-
-use App\Services\Expedia\Api\Response\ExpediaSuggestionsApiResponse;
-use App\Services\Expedia\Api\Response\ExpediaApiGenericResponse;
+use App\Services\Expedia\Api\Suggestions\ExpediaSuggestionsApiResponse;
+use App\Services\Expedia\Api\ExpediaApiGenericResponse;
+use App\Services\Expedia\Api\ExpediaApiHttpClient;
 
 class ExpediaSuggestionsApiService implements SuggestionsServiceInterface
 {
