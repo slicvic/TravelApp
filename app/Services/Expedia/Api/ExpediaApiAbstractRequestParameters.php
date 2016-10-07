@@ -39,6 +39,17 @@ abstract class ExpediaApiAbstractRequestParameters
     }
 
     /**
+     * Set the parameters.
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters)
+    {
+        foreach ($parameters as $property => $value) {
+            $this->$property = $value;
+        }
+    }
+
+    /**
      * Convert parameters to URL query string.
      * @return array
      */
@@ -47,16 +58,5 @@ abstract class ExpediaApiAbstractRequestParameters
         $this->parameters['apikey'] = env('EXPEDIA_API_KEY');
 
         return http_build_query($this->parameters);
-    }
-
-    /**
-     * Set the parameters.
-     * @param array $parameters
-     */
-    private function setParameters(array $parameters)
-    {
-        foreach ($parameters as $property => $value) {
-            $this->$property = $value;
-        }
     }
 }

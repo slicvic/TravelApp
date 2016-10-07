@@ -17,7 +17,7 @@ abstract class ExpediaApiAbstractResponse implements ExpediaApiResponseInterface
 
     /**
      * Constructor.
-     * @param string|array $data A json encoded string or array
+     * @param string|array $data An array or a json encoded string
      * @param int $status
      */
     public function __construct($data, int $status = 200)

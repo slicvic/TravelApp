@@ -27,9 +27,10 @@ class AutoSuggestController extends BaseController
             ]);
         }
 
-        $apiParameters = new ExpediaSuggestionsApiRequestParameters();
-        $apiParameters->query = $input['query'];
-        $apiParameters->maxresults = 10;
+        $apiParameters = new ExpediaSuggestionsApiRequestParameters([
+            'query' => $input['query'],
+            'maxresults' => 10
+        ]);
 
         $apiResponse = $this->suggestionsService->regions($apiParameters);
 
