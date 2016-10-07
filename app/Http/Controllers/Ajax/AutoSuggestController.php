@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Ajax;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Ajax\BaseController;
-use App\Contracts\SuggestionsServiceInterface;
+use App\Services\Expedia\Api\Suggestions\ExpediaSuggestionsApiRequestParameters;
+use App\Services\Expedia\Api\Suggestions\ExpediaSuggestionsApiService;
 
 class AutoSuggestController extends BaseController
 {
     private $suggestionsService;
 
-    public function __construct(SuggestionsServiceInterface $suggestionsService)
+    public function __construct(ExpediaSuggestionsApiService $suggestionsService)
     {
         $this->suggestionsService = $suggestionsService;
     }
@@ -26,11 +27,15 @@ class AutoSuggestController extends BaseController
             ]);
         }
 
-        $data = $this->suggestionsService->regions($input['query']);
+        $apiParameters = new ExpediaSuggestionsApiRequestParameters();
+        $apiParameters->query = $input['query'];
+        $apiParameters->maxresults = 10;
+
+        $apiResponse = $this->suggestionsService->regions($apiParameters);
 
         $response = [
             'success' => 1,
-            'results' => $data->getResults()
+            'results' => $apiResponse->getData()
         ];
 
         return response()->json($response);

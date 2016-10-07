@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Expedia\Api;
 
-abstract class ExpediaApiAbstractResponse
+abstract class ExpediaApiAbstractResponse implements ExpediaApiResponseInterface
 {
     /**
      * HTTP status code.
@@ -10,30 +10,24 @@ abstract class ExpediaApiAbstractResponse
     protected $status;
 
     /**
-     * @var string
+     * The data of the response.
+     * @var array
      */
-    protected $rawResponse;
-
-    /**
-     * @var stdClass
-     */
-    protected $rawResponseObject;
+    protected $data;
 
     /**
      * Constructor.
-     * @param int    $status
-     * @param string $body
+     * @param string|array $data A json encoded string or array
+     * @param int $status
      */
-    public function __construct(int $status, string $body)
+    public function __construct($data, int $status = 200)
     {
-        $this->status = $status;
-        $this->rawResponse = $body;
-        $this->rawResponseObject = $this->decodeJson($body);
+        $this->setData($data);
+        $this->setStatus($status);
     }
 
     /**
-     * Get status.
-     * @return int
+     * {@inheritdoc}
      */
     public function getStatus()
     {
@@ -41,30 +35,33 @@ abstract class ExpediaApiAbstractResponse
     }
 
     /**
-     * Get rawResponse.
-     * @return string
+     * {@inheritdoc}
      */
-    public function getRawResponse()
+    public function setStatus(int $status)
     {
-        return $this->rawResponse;
+        $this->status = $status;
+        return $this;
     }
 
     /**
-     * Get rawResponseObject.
-     * @return stdClass
+     * {@inheritdoc}
      */
-    public function getRawResponseObject()
+    public function getData()
     {
-        return $this->rawResponseObject;
+        return $this->data;
     }
 
     /**
-     * Decode a JSON string.
-     * @param  string $json
-     * @return stdClass
+     * {@inheritdoc}
      */
-    private function decodeJson(string $json)
+    public function setData($data)
     {
-        return json_decode($json);
+        if (is_string($data)) {
+            $this->data = json_decode($data, true);
+        } else {
+            $this->data = $data;
+        }
+
+        return $this;
     }
 }

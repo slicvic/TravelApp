@@ -1,54 +1,44 @@
 <?php
 namespace App\Services\Expedia\Api\Suggestions;
 
-use App\Contracts\SuggestionsServiceResponseInterface;
 use App\Services\Expedia\Api\ExpediaApiAbstractResponse;
 
-class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse implements SuggestionsServiceResponseInterface
+class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
 {
     /**
+     * The original response data.
      * @var array
      */
-    private $results;
+    protected $originalData;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function __construct(int $status, string $body)
+    public function setData($data)
     {
-        parent::__construct($status, $body);
+        parent::setData($data);
 
-        $this->prepareResults();
+        $this->originalData = $this->data;
+        $this->data = [];
+
+        if (!(!empty($data['rc']) && $data['rc'] == 'OK' && !empty($data['sr']))) {
+            return;
+        }
+
+        foreach ($data['sr'] as $result) {
+            $result['d'] = str_replace(['<B>', '</B>'], ['', ''], $result['d']);
+            $this->data[] = $result;
+        }
+
+        return $this;
     }
 
     /**
-     * Get results.
+     * Get the original data.
      * @return array
      */
-    public function getResults()
+    public function getOriginalData()
     {
-        return $this->results;
-    }
-
-    /**
-     * Extract results from raw response and prepare it for client.
-     */
-    private function prepareResults()
-    {
-        $this->results = [];
-
-        if ($this->status != 200 || !$this->rawResponseObject) {
-            return;
-        }
-
-        if ($this->rawResponseObject->rc != 'OK' || empty($this->rawResponseObject->sr)) {
-            return;
-        }
-
-        $this->results = $this->rawResponseObject->sr;
-
-        foreach ($this->results as $data) {
-            $data->d = str_replace(['<B>', '</B>'], ['', ''], $data->d);
-        }
+        return $this->originalData;
     }
 }

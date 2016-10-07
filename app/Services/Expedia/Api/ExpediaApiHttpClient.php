@@ -1,29 +1,27 @@
 <?php
 namespace App\Services\Expedia\Api;
 
-use App\Services\Expedia\Api\ExpediaApiGenericResponse;
+use App\Services\Expedia\Api\ExpediaApiResponse;
+use App\Services\Expedia\Api\ExpediaApiAbstractRequestParameters;
 
 class ExpediaApiHttpClient
 {
     /**
      * Perform HTTP GET request.
      * @param  string $url
-     * @param  array  $data
-     * @return ExpediaApiGenericResponse
+     * @param  ExpediaApiAbstractRequestParameters $data
+     * @return ExpediaApiResponse
      */
-    public function get(string $url, array $data)
+    public function get(string $url, ExpediaApiAbstractRequestParameters $parameters)
     {
-        $data['apikey'] = env('EXPEDIA_API_KEY');
-
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($data));
+        curl_setopt($ch, CURLOPT_URL, $url . '?' . $parameters->toQueryString());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $responseBody = curl_exec($ch);
-        $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+        $data = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        $response = new ExpediaApiGenericResponse($responseCode, $responseBody);
+        $response = new ExpediaApiResponse($data, $status);
 
         return $response;
     }
