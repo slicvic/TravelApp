@@ -27,7 +27,6 @@ class HotelsController extends BaseController
 
         return response()->json($apiResponse->getData());
 
-
         return view('hotels.index');
     }
 

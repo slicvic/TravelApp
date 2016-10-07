@@ -36,7 +36,7 @@ class AutoSuggestController extends BaseController
 
         $response = [
             'success' => 1,
-            'results' => $apiResponse->getData()
+            'results' => $apiResponse->getResults()
         ];
 
         return response()->json($response);

@@ -6,42 +6,43 @@ use App\Services\Expedia\Api\ExpediaApiAbstractResponse;
 class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
 {
     /**
-     * The original response data.
+     * The search results.
      * @var array
      */
-    protected $originalData;
+    protected $results;
 
-    /**
-     * Get the original data.
-     * @return array
-     */
-    public function getOriginalData()
-    {
-        return $this->originalData;
-    }
-    
     /**
      * {@inheritdoc}
      */
-    public function setData($data)
+    public function __construct($data, $status = 200)
     {
-        parent::setData($data);
+        parent::__construct($data, $status);
 
-        // Save original data
-        $this->originalData = $this->data;
+        $this->setResults();
+    }
+    /**
+     * Get the search results.
+     * @return array
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
 
-        // Make data the actual search results
-        $this->data = [];
+    /**
+     * Extract and normalize actual search results from response data.
+     */
+    private function setResults()
+    {
+        $this->results = [];
 
-        if (!(!empty($data['rc']) && $data['rc'] == 'OK' && !empty($data['sr']))) {
-            return $this;
+        if (!(!empty($this->data['rc']) && $this->data['rc'] == 'OK' && !empty($this->data['sr']))) {
+            return;
         }
 
-        foreach ($data['sr'] as $result) {
-            $result['d'] = str_replace(['<B>', '</B>'], ['', ''], $result['d']);
-            $this->data[] = $result;
+        foreach ($this->data['sr'] as $row) {
+            $row['d'] = str_replace(['<B>', '</B>'], ['', ''], $row['d']);
+            $this->results[] = $row;
         }
-
-        return $this;
     }
 }
