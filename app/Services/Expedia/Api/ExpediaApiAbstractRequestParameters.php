@@ -25,27 +25,37 @@ abstract class ExpediaApiAbstractRequestParameters
     }
 
     /**
-     * Set parameters.
+     * Set a parameter.
      * @param string $property
      * @param mixed $value
      */
     public function __set($property, $value)
     {
-        if (!array_key_exists($property, $this->parameters)) {
-            return;
-        }
-
-        $this->parameters[$property] = $value;
+        $this->setParameter($property, $value);
     }
 
     /**
-     * Set the parameters.
+     * Set a parameter.
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setParameter($name, $value)
+    {
+        if (!array_key_exists($name, $this->parameters)) {
+            return;
+        }
+
+        $this->parameters[$name] = $value;
+    }
+
+    /**
+     * Set a group of parameters.
      * @param array $parameters
      */
     public function setParameters(array $parameters)
     {
-        foreach ($parameters as $property => $value) {
-            $this->$property = $value;
+        foreach ($parameters as $name => $value) {
+            $this->setParameter($name, $value);
         }
     }
 
@@ -55,8 +65,9 @@ abstract class ExpediaApiAbstractRequestParameters
      */
     public final function toQueryString()
     {
-        $this->parameters['apikey'] = env('EXPEDIA_API_KEY');
+        $parameters = $this->parameters;
+        $parameters['apikey'] = env('EXPEDIA_API_KEY');
 
-        return http_build_query($this->parameters);
+        return http_build_query($parameters);
     }
 }

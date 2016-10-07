@@ -16,17 +16,18 @@ class HotelsController extends BaseController
 
     public function index()
     {
-        $apiParameters = new ExpediaHotelSearchApiRequestParameters();
-        $apiParameters->city = 'MIA';
-        $apiParameters->checkInDate = '2016-10-20';
-        $apiParameters->checkOutDate = '2016-10-25';
-        $apiParameters->room1 = 2;
+        $apiParameters = new ExpediaHotelSearchApiRequestParameters([
+            'city' => 'MIA',
+            'checkInDate' => '2016-10-20',
+            'checkOutDate' => '2016-10-25',
+            'room1' => 2
+        ]);
 
         $apiResponse = $this->hotelSearchService->search($apiParameters);
-        //echo $apiParameters->toQueryString();exit;
-        return response()->json($apiResponse->getRawResponse());
 
-        //exit;
+        return response()->json($apiResponse->getData());
+
+
         return view('hotels.index');
     }
 
