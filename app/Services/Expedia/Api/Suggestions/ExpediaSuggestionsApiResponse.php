@@ -18,7 +18,10 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
     {
         parent::setData($data);
 
+        // Save original data
         $this->originalData = $this->data;
+
+        // Make data the actual search results
         $this->data = [];
 
         if (!(!empty($data['rc']) && $data['rc'] == 'OK' && !empty($data['sr']))) {
