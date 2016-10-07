@@ -12,6 +12,15 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
     protected $originalData;
 
     /**
+     * Get the original data.
+     * @return array
+     */
+    public function getOriginalData()
+    {
+        return $this->originalData;
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function setData($data)
@@ -34,14 +43,5 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
         }
 
         return $this;
-    }
-
-    /**
-     * Get the original data.
-     * @return array
-     */
-    public function getOriginalData()
-    {
-        return $this->originalData;
     }
 }
