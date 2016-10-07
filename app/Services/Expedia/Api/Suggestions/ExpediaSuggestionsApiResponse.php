@@ -25,7 +25,7 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
         $this->data = [];
 
         if (!(!empty($data['rc']) && $data['rc'] == 'OK' && !empty($data['sr']))) {
-            return;
+            return $this;
         }
 
         foreach ($data['sr'] as $result) {
