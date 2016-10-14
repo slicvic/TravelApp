@@ -6,7 +6,7 @@ use App\Services\Expedia\Api\ExpediaApiAbstractResponse;
 class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
 {
     /**
-     * The search results.
+     * The normalized search results.
      * @var array
      */
     protected $results;
@@ -18,10 +18,10 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
     {
         parent::__construct($data, $status);
 
-        $this->setResults();
+        $this->normalizeResults();
     }
     /**
-     * Get the search results.
+     * Get the normalized search results.
      * @return array
      */
     public function getResults()
@@ -30,9 +30,9 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
     }
 
     /**
-     * Extract and normalize actual search results from response data.
+     * Extract and normalize search results from response data.
      */
-    private function setResults()
+    private function normalizeResults()
     {
         $this->results = [];
 
