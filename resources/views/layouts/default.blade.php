@@ -11,6 +11,7 @@
         @section('stylesheets')
             <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
             <link href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+            <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
             <link href="/app/css/typeaheadjs.css" rel="stylesheet">
             <link href="/app/css/app.css" rel="stylesheet">
         @show
@@ -44,12 +45,14 @@
         <div class="container">
             @yield('content')
         </div>
+        
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="/bower_components/typeahead.js/dist/bloodhound.min.js"></script>
+        <script src="/bower_components/typeahead.js/dist/typeahead.jquery.min.js"></script>
+        <script src="/bower_components/vue/dist/vue.min.js"></script>
         @section('javascripts')
-            <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-            <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-            <script src="/bower_components/typeahead.js/dist/bloodhound.min.js"></script>
-            <script src="/bower_components/typeahead.js/dist/typeahead.jquery.min.js"></script>
-            <script src="/app/js/app.js"></script>
         @show
+        <script src="/app/js/app.js"></script>
     </body>
 </html>

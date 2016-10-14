@@ -1,24 +1,33 @@
-var app = (function(jquery) {
+var app = (function($) {
     var selectors = {
-        regionsTypeaheadInput: null,
-        datePickerInput: null,
+        typeahead: {
+            regions: null
+        },
+        datepicker: {
+            generic: null
+        }
     };
 
     function init() {
         setSelectors();
-        bindDatePickerInputs();
-        bindTypeaheadInputs();
+        bindDatepickers();
+        bindTypeaheads();
     }
 
-    function bindDatePickerInputs() {
-        selectors.datePickerInput.datepicker({
+    function setSelectors() {
+        selectors.typeahead.regions = $('.js-typeahead-regions');
+        selectors.datepicker.generic = $('.js-datepicker');
+    }
+
+    function bindDatepickers() {
+        selectors.datepicker.generic.datepicker({
             todayHighlight: true,
             autoclose: true
         });
     }
 
-    function bindTypeaheadInputs() {
-        var regionsEngine = new Bloodhound({
+    function bindTypeaheads() {
+        var regions = new Bloodhound({
             remote: {
                 url: '/ajax/autosuggest/regions?query=%QUERY%',
                 wildcard: '%QUERY%',
@@ -32,44 +41,39 @@ var app = (function(jquery) {
             }
         });
 
-        selectors.regionsTypeaheadInput.typeahead({
-                hint: true,
-                highlight: true,
-                minLength: 1
-            }, {
-                source: regionsEngine.ttAdapter(),
-                display: function(datum) {
-                    return datum.d;
-                },
-                templates: {
-                    empty: [
-                        '<div>Nothing Found.</div>'
-                    ],
-                    suggestion: function (data) {
-                        return ['<a href="#">', data.d, '</a>'].join('');
-                    }
+        selectors.typeahead.regions.typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        }, {
+            source: regions.ttAdapter(),
+            display: function(datum) {
+                return datum.d;
+            },
+            templates: {
+                empty: [
+                    '<div>Nothing Found.</div>'
+                ],
+                suggestion: function (data) {
+                    return ['<a href="#">', data.d, '</a>'].join('');
                 }
+            }
         }).on('typeahead:selected', function (obj, datum) {
-            var self = jquery(this);
+            var $this = $(this);
 
-            if (self.data('field-region-id')) {
-                jquery(self.data('field-region-id')).val(datum.id);
+            if ($this.data('bind-field-region-id')) {
+                $($this.data('bind-field-region-id')).val(datum.id);
             }
 
-            if (self.data('field-region-name')) {
-                jquery(self.data('field-region-name')).val(datum.d);
-            }
-
-            if (self.data('field-region-airport-code')) {
-                jquery(self.data('field-region-airport-code')).val(datum.a);
+            if ($this.data('bind-field-region-airport-code')) {
+                $($this.data('bind-field-region-airport-code')).val(datum.a);
             }
         });
     }
 
-    function setSelectors() {
-        selectors.regionsTypeaheadInput = jquery('[data-typeahead-regions]');
-        selectors.datePickerInput = jquery('[data-datepicker]');
-    }
-
-    init();
+    return {
+        init: init
+    };
 }($));
+
+app.init();

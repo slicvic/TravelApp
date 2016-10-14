@@ -65,9 +65,6 @@ abstract class ExpediaApiAbstractRequestParameters
      */
     public final function toQueryString()
     {
-        $parameters = $this->parameters;
-        $parameters['apikey'] = env('EXPEDIA_API_KEY');
-
-        return http_build_query($parameters);
+        return http_build_query($this->parameters);
     }
 }

@@ -14,6 +14,8 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "bootstrap-3-datepicker#^1.6.4",
-    "typeahead.js": "^0.11.1"
+    "typeahead.js": "^0.11.1",
+    "font-awesome": "fontawesome#^4.6.3",
+    "vue": "^2.0.3"
   }
 }

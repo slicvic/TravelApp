@@ -1,6 +1,8 @@
 <?php
 namespace App\Services\Expedia\Api;
 
+use App\Services\Expedia\Api\Exceptions\InvalidResponseDataException;
+
 abstract class ExpediaApiAbstractResponse implements ExpediaApiResponseInterface
 {
     /**
@@ -10,7 +12,7 @@ abstract class ExpediaApiAbstractResponse implements ExpediaApiResponseInterface
     protected $status;
 
     /**
-     * The data of the response.
+     * The data from the response.
      * @var array
      */
     protected $data;
@@ -56,6 +58,10 @@ abstract class ExpediaApiAbstractResponse implements ExpediaApiResponseInterface
      */
     public function setData($data)
     {
+        if (!(is_string($data) || is_array($data))) {
+            throw new InvalidResponseDataException;
+        }
+
         if (is_string($data)) {
             $this->data = json_decode($data, true);
         } else {
