@@ -10,7 +10,7 @@ abstract class ExpediaApiAbstractRequestParameters
     protected $required = [];
 
     /**
-     * List of parameter key/value pairs.
+     * List of parameter name/value pairs.
      * @var array
      */
     protected $parameters = [];
@@ -26,12 +26,12 @@ abstract class ExpediaApiAbstractRequestParameters
 
     /**
      * Set a parameter.
-     * @param string $property
+     * @param string $name
      * @param mixed $value
      */
-    public function __set($property, $value)
+    public function __set($name, $value)
     {
-        $this->setParameter($property, $value);
+        $this->setParameter($name, $value);
     }
 
     /**
