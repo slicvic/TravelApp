@@ -84,8 +84,8 @@ class ExpediaHotelSearchApiRequestParameters extends ExpediaApiAbstractRequestPa
             case 'room':
                 if (is_array($value)) {
                     if (count($value) === 2) {
-                        $value[0] = (int) $value[0];
-                        $value[1] = (array) $value[1];
+                        $value[0] = (int) $value[0]; // # of adults
+                        $value[1] = (array) $value[1]; // Ages for all children
                         $value = sprintf('%s%s',
                             $value[0],
                             (count($value[1])) ? ',' . implode(',', $value[1]) : ''
