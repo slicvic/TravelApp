@@ -9,6 +9,7 @@ var hotelSearchForm = (function($) {
 
         },
         methods: {
+
         }
     });
 }($));

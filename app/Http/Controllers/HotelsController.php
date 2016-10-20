@@ -48,8 +48,12 @@ class HotelsController extends BaseController
 
         $apiResponse = $this->hotelSearchService->search($apiParameters);
 
-        return response()->json($apiResponse->getData());
+        if ($request->get('debug')) {
+            var_dump($apiResponse->getData());
+        }
 
-        return view('hotels.search');
+        return view('hotels.search', [
+            'data' => $apiResponse->getData()
+        ]);
     }
 }

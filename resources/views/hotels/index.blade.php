@@ -106,7 +106,7 @@
 @section('javascripts')
     <script src="/app/js/hotels/hotel-search-form.js"></script>
     <script>
-        hotelSearchForm.children = '{{ old('children', 0) }}';
-        hotelSearchForm.childrenAges = {!! json_encode(old('children_ages', [])) : '[]' !!};
+        hotelSearchForm.children = '{{ old('children', 0) }}'
+        hotelSearchForm.childrenAges = {!! json_encode(old('children_ages', [])) !!};
     </script>
 @endsection
