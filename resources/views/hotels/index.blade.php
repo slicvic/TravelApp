@@ -24,7 +24,7 @@
                 <input
                     type="text"
                     name="region[name]"
-                    class="form-control input-lg js-typeahead-regions"
+                    class="form-control input-lg js-typeahead-region"
                     placeholder="e.g. city, region, district or specific hotel"
                     value="{{ old('region.name') }}"
                     data-bind-field-region-id="#hotel-search-form-region-id"
@@ -104,7 +104,7 @@
 @endsection
 
 @section('javascripts')
-    <script src="/app/js/hotels/hotel-search-form.js"></script>
+    <script src="/app/src/js/hotels/hotel-search-form.js"></script>
     <script>
         hotelSearchForm.children = '{{ old('children', 0) }}'
         hotelSearchForm.childrenAges = {!! json_encode(old('children_ages', [])) !!};

@@ -1,7 +1,7 @@
 var app = (function($) {
     var selectors = {
         typeahead: {
-            regions: null
+            region: null
         },
         datepicker: {
             generic: null
@@ -21,7 +21,7 @@ var app = (function($) {
     }
 
     function setSelectors() {
-        selectors.typeahead.regions = $('.js-typeahead-regions');
+        selectors.typeahead.region = $('.js-typeahead-region');
         selectors.datepicker.generic = $('.js-datepicker');
     }
 
@@ -47,7 +47,7 @@ var app = (function($) {
             }
         });
 
-        selectors.typeahead.regions.typeahead({
+        selectors.typeahead.region.typeahead({
             hint: true,
             highlight: true,
             minLength: 1
