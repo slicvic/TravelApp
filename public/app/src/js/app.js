@@ -1,15 +1,14 @@
 var app = (function($) {
-    var selectors = {
+    var elements = {
         typeahead: {
-            region: null
+            region: $('.js-typeahead-region')
         },
         datepicker: {
-            generic: null
+            generic: $('.js-datepicker')
         }
     };
 
     function init() {
-        setSelectors();
         bindDatepickers();
         bindTypeaheads();
 
@@ -20,13 +19,8 @@ var app = (function($) {
         });
     }
 
-    function setSelectors() {
-        selectors.typeahead.region = $('.js-typeahead-region');
-        selectors.datepicker.generic = $('.js-datepicker');
-    }
-
     function bindDatepickers() {
-        selectors.datepicker.generic.datepicker({
+        elements.datepicker.generic.datepicker({
             todayHighlight: true,
             autoclose: true
         });
@@ -47,7 +41,7 @@ var app = (function($) {
             }
         });
 
-        selectors.typeahead.region.typeahead({
+        elements.typeahead.region.typeahead({
             hint: true,
             highlight: true,
             minLength: 1
