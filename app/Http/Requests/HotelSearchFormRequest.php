@@ -42,7 +42,7 @@ class HotelSearchFormRequest extends Request
         return [
             'checkin_date.required' => 'The check in date is required.',
             'checkout_date.required' => 'The check out date is required.',
-            'region.name.required' => 'The destination is missing or invalid.'
+            'region.name.required' => 'The destination is required.'
         ];
     }
 
@@ -54,12 +54,20 @@ class HotelSearchFormRequest extends Request
      */
     public function response(array $errors)
     {
+        // Check if the region was provided but id or airport code is missing
+        if (!array_key_exists('region.name', $errors) &&
+            (array_key_exists('region.id', $errors) || array_key_exists('region.airport_code', $errors))
+        ) {
+            $errors['region.name'] = 'We didn\'t understand your destination, please select from suggestions that appear when typing.';
+        }
+
+        // Don't wanna show these errors
+        unset($errors['region.id']);
+        unset($errors['region.airport_code']);
+
         if (($this->ajax() && ! $this->pjax()) || $this->wantsJson()) {
             return new JsonResponse($errors, 422);
         }
-
-        unset($errors['region.id']);
-        unset($errors['region.airport_code']);
 
         return $this->redirector->to($this->getRedirectUrl())
                                         ->withInput($this->except($this->dontFlash))

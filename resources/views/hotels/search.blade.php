@@ -1,15 +1,9 @@
 hotel search
 
-@foreach ($data['hotelList'] as $hotel)
-<div class="media">
-    <div class="media-left">
-        <a href="#">
-            <img class="media-object" src="..." alt="...">
-        </a>
+@if (empty($data['hotelList'] ))
+    <div class="alert alert-danger">
+        <strong><i class="fa fa-times"></i></strong> Sorry, we couldn't find prices or availability for your request.
     </div>
-    <div class="media-body">
-        <h4 class="media-heading">{{ $hotel['name'] }}</h4>
-
-    </div>
-</div>
-@endforeach
+@else
+    @each('hotels.partials.search-results-list-item', $data['hotelList'], 'hotel');
+@endif

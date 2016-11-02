@@ -15,6 +15,7 @@ class ExpediaSuggestionsApiService
 
     /**
      * Constructor.
+     *
      * @param ExpediaApiHttpClient $expediaApiHttpClient
      */
     public function __construct(ExpediaApiHttpClient $expediaApiHttpClient)
@@ -24,6 +25,7 @@ class ExpediaSuggestionsApiService
 
     /**
      * Get hotels suggestions.
+     *
      * @param  ExpediaSuggestionsApiRequestParameters $parameters
      * @return ExpediaSuggestionsApiResponse
      */
@@ -34,6 +36,7 @@ class ExpediaSuggestionsApiService
 
     /**
      * Get regions suggestions.
+     *
      * @param  ExpediaSuggestionsApiRequestParameters $parameters
      * @return ExpediaSuggestionsApiResponse
      */
@@ -44,6 +47,7 @@ class ExpediaSuggestionsApiService
 
     /**
      * Get flights suggestions.
+     *
      * @param  ExpediaSuggestionsApiRequestParameters $parameters
      * @return ExpediaSuggestionsApiResponse
      */
@@ -54,6 +58,7 @@ class ExpediaSuggestionsApiService
 
     /**
      * Perform HTTP request.
+     * 
      * @param  string $url
      * @param  ExpediaSuggestionsApiRequestParameters $parameters
      * @return ExpediaSuggestionsApiResponse
@@ -62,16 +67,6 @@ class ExpediaSuggestionsApiService
     {
         $response = $this->expediaApiHttpClient->get($url, $parameters);
 
-        return $this->processResponse($response);
-    }
-
-    /**
-     * Process the response.
-     * @param  ExpediaApiResponse $response
-     * @return ExpediaSuggestionsApiResponse
-     */
-    private function processResponse(ExpediaApiResponse $response)
-    {
-        return (new ExpediaSuggestionsApiResponse($response->getData(), $response->getStatus()));
+        return (new ExpediaSuggestionsApiResponse($response->getBody(), $response->getStatus()));
     }
 }

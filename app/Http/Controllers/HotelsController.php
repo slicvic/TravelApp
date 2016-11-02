@@ -11,18 +11,37 @@ use App\Services\Expedia\Api\Hotels\ExpediaHotelSearchApiRequestParameters;
 
 class HotelsController extends BaseController
 {
+    /**
+     * @var ExpediaHotelsApiService
+     */
     private $hotelSearchService;
 
+    /**
+     * Constructor.
+     *
+     * @param ExpediaHotelsApiService $hotelSearchService
+     */
     public function __construct(ExpediaHotelsApiService $hotelSearchService)
     {
         $this->hotelSearchService = $hotelSearchService;
     }
 
+    /**
+     * Show search home page.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         return view('hotels.index');
     }
 
+    /**
+     * Search hotels with given criteria and show results.
+     *
+     * @param  HotelSearchFormRequest $request
+     * @return \Illuminate\View\View
+     */
     public function search(HotelSearchFormRequest $request)
     {
         $input = $request->only([
@@ -49,11 +68,11 @@ class HotelsController extends BaseController
         $apiResponse = $this->hotelSearchService->search($apiParameters);
 
         if ($request->get('debug')) {
-            var_dump($apiResponse->getData());
+            var_dump($apiResponse->getDecodedBody());
         }
 
         return view('hotels.search', [
-            'data' => $apiResponse->getData()
+            'data' => $apiResponse->getDecodedBody()
         ]);
     }
 }

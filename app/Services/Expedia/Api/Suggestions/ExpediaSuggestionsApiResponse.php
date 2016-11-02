@@ -6,7 +6,8 @@ use App\Services\Expedia\Api\ExpediaApiAbstractResponse;
 class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
 {
     /**
-     * The normalized search results.
+     * The search results.
+     * 
      * @var array
      */
     protected $results;
@@ -14,14 +15,16 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function __construct($data, $status = 200)
+    public function __construct($body, $status = 200)
     {
-        parent::__construct($data, $status);
+        parent::__construct($body, $status);
 
-        $this->normalizeResults();
+        $this->setResults();
     }
+
     /**
-     * Get the normalized search results.
+     * Get search results.
+     *
      * @return array
      */
     public function getResults()
@@ -30,17 +33,17 @@ class ExpediaSuggestionsApiResponse extends ExpediaApiAbstractResponse
     }
 
     /**
-     * Extract and normalize search results from response data.
+     * Extract and prepare search results from body.
      */
-    private function normalizeResults()
+    private function setResults()
     {
         $this->results = [];
 
-        if (!(!empty($this->data['rc']) && $this->data['rc'] == 'OK' && !empty($this->data['sr']))) {
+        if (!(!empty($this->decodedBody['rc']) && $this->decodedBody['rc'] == 'OK' && !empty($this->decodedBody['sr']))) {
             return;
         }
 
-        foreach ($this->data['sr'] as $row) {
+        foreach ($this->decodedBody['sr'] as $row) {
             $row['d'] = str_replace(['<B>', '</B>'], ['', ''], $row['d']);
             $this->results[] = $row;
         }

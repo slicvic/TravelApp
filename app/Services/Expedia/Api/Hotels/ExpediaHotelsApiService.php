@@ -13,6 +13,7 @@ class ExpediaHotelsApiService
 
     /**
      * Constructor.
+     * 
      * @param ExpediaApiHttpClient $expediaApiHttpClient
      */
     public function __construct(ExpediaApiHttpClient $expediaApiHttpClient)

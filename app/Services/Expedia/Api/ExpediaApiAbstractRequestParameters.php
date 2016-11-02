@@ -5,18 +5,21 @@ abstract class ExpediaApiAbstractRequestParameters
 {
     /**
      * List of required parameters.
+     *
      * @var array
      */
     protected $required = [];
 
     /**
      * List of parameter name/value pairs.
+     *
      * @var array
      */
     protected $parameters = [];
 
     /**
      * Constructor.
+     *
      * @param array $parameters
      */
     public function __construct(array $parameters = [])
@@ -26,6 +29,7 @@ abstract class ExpediaApiAbstractRequestParameters
 
     /**
      * Set a parameter.
+     *
      * @param string $name
      * @param mixed $value
      */
@@ -36,6 +40,7 @@ abstract class ExpediaApiAbstractRequestParameters
 
     /**
      * Set a parameter.
+     *
      * @param string $name
      * @param mixed $value
      */
@@ -50,6 +55,7 @@ abstract class ExpediaApiAbstractRequestParameters
 
     /**
      * Set a group of parameters.
+     *
      * @param array $parameters
      */
     public function setParameters(array $parameters)
@@ -61,6 +67,7 @@ abstract class ExpediaApiAbstractRequestParameters
 
     /**
      * Convert parameters to URL query string.
+     * 
      * @return array
      */
     public final function toQueryString()

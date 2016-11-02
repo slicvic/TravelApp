@@ -1,32 +1,36 @@
 var app = (function($) {
-    var elements = {
-        typeahead: {
-            region: $('.js-typeahead-region')
-        },
-        datepicker: {
-            generic: $('.js-datepicker')
-        }
-    };
+    var viewModels = {};
 
     function init() {
-        bindDatepickers();
-        bindTypeaheads();
+        initViewModels();
+        bindjQueryElements();
+    }
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    function initViewModels() {
+        viewModels.hotels = {};
+        viewModels.hotels.searchForm = new Vue({
+            el: '#hotels--search-form',
+            data: {
+                children: 0,
+                childrenAges: []
+            },
+            watch: {
+
+            },
+            methods: {
+
             }
         });
     }
 
-    function bindDatepickers() {
-        elements.datepicker.generic.datepicker({
+    function bindjQueryElements() {
+        // Datepicker
+        $('.js-datepicker').datepicker({
             todayHighlight: true,
             autoclose: true
         });
-    }
 
-    function bindTypeaheads() {
+        // Typeaheads
         var regions = new Bloodhound({
             remote: {
                 url: '/ajax/autosuggest/regions?query=%QUERY%',
@@ -41,7 +45,7 @@ var app = (function($) {
             }
         });
 
-        elements.typeahead.region.typeahead({
+        $('.js-typeahead-region').typeahead({
             hint: true,
             highlight: true,
             minLength: 1
@@ -59,15 +63,13 @@ var app = (function($) {
                 }
             }
         }).on('typeahead:selected', function (obj, datum) {
-            var $this = $(this);
-
-            if ($this.data('bind-field-region-id')) {
-                $($this.data('bind-field-region-id')).val(datum.id);
-            }
-
-            if ($this.data('bind-field-region-airport-code')) {
-                $($this.data('bind-field-region-airport-code')).val(datum.a);
-            }
+            var el = $(this);
+            $(el.data('bind-field-region-id')).val(datum.id);
+            $(el.data('bind-field-region-airport-code')).val(datum.a);
+        }).on('change', function() {
+            var el = $(this);
+            $(el.data('bind-field-region-id')).val('');
+            $(el.data('bind-field-region-airport-code')).val('');
         });
     }
 

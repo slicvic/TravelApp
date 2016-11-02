@@ -9,20 +9,34 @@ use App\Services\Expedia\Api\Suggestions\ExpediaSuggestionsApiService;
 
 class AutoSuggestController extends BaseController
 {
+    /**
+     * @var ExpediaSuggestionsApiService
+     */
     private $suggestionsService;
 
+    /**
+     * Constructor.
+     *
+     * @param ExpediaSuggestionsApiService $suggestionsService
+     */
     public function __construct(ExpediaSuggestionsApiService $suggestionsService)
     {
         $this->suggestionsService = $suggestionsService;
     }
 
+    /**
+     * Get list of regions with given criteria.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function regions(Request $request)
     {
         $input = $request->only(['query']);
 
         if (!$input['query']) {
             return response()->json([
-                'success' => 0,
+                'success' => false,
                 'message' => 'Missing required parameter: query'
             ]);
         }
@@ -35,7 +49,7 @@ class AutoSuggestController extends BaseController
         $apiResponse = $this->suggestionsService->regions($apiParameters);
 
         $response = [
-            'success' => 1,
+            'success' => true,
             'results' => $apiResponse->getResults()
         ];
 

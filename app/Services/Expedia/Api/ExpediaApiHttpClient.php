@@ -8,6 +8,7 @@ class ExpediaApiHttpClient
 {
     /**
      * Perform HTTP GET request.
+     * 
      * @param  string $url
      * @param  ExpediaApiAbstractRequestParameters $data
      * @return ExpediaApiResponse
@@ -21,11 +22,11 @@ class ExpediaApiHttpClient
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization: expedia-apikey key=' . env('EXPEDIA_API_KEY')
         ));
-        $data = curl_exec($ch);
+        $body = curl_exec($ch);
         $headers = curl_getinfo($ch);
         curl_close($ch);
 
-        $response = new ExpediaApiResponse($data, $headers['http_code']);
+        $response = new ExpediaApiResponse($body, $headers['http_code']);
 
         return $response;
     }

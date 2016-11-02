@@ -7,25 +7,35 @@ abstract class ExpediaApiAbstractResponse implements ExpediaApiResponseInterface
 {
     /**
      * HTTP status code.
+     *
      * @var int
      */
     protected $status;
 
     /**
-     * The data from the response.
+     * The body of the response (json encoded).
+     *
+     * @var string
+     */
+    protected $body;
+
+    /**
+     * The decoded body of the response.
+     *
      * @var array
      */
-    protected $data;
+    protected $decodedBody;
 
     /**
      * Constructor.
-     * @param string|array $data An array or a json encoded string
+     * 
+     * @param string $body A json encoded string.
      * @param int $status
      */
-    public function __construct($data, int $status = 200)
+    public function __construct($body, int $status = 200)
     {
-        $this->setData($data);
         $this->setStatus($status);
+        $this->setBody($body);
     }
 
     /**
@@ -48,26 +58,30 @@ abstract class ExpediaApiAbstractResponse implements ExpediaApiResponseInterface
     /**
      * {@inheritdoc}
      */
-    public function getData()
+    public function getBody()
     {
-        return $this->data;
+        return $this->body;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setData($data)
+    public function getDecodedBody()
     {
-        if (!(is_string($data) || is_array($data))) {
-            throw new InvalidResponseDataException;
+        return $this->decodedBody;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBody($body)
+    {
+        if (!is_string($body)) {
+            throw new InvalidResponseDataException('Argument must be a json encoded string.');
         }
 
-        if (is_string($data)) {
-            $this->data = json_decode($data, true);
-        } else {
-            $this->data = $data;
-        }
+        $this->body = $body;
 
-        return $this;
+        $this->decodedBody = json_decode($body, true);
     }
 }

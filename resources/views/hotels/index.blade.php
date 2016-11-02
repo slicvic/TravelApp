@@ -6,9 +6,7 @@
 @section('content')
     <div class="jumbotron">
         <h2>Find Hotel Deals</h2>
-        @include('flash-messages/error', ['errors' => $errors])
-
-        <form method="get" action="{{ route('hotels.search') }}" id="hotel-search-form">
+        <form method="get" action="{{ route('hotels.search') }}" id="hotels--search-form">
             <div class="form-group">
                 <label>Destination</label>
                 <input
@@ -104,7 +102,7 @@
 @endsection
 
 @section('javascripts')
-    <script src="/app/src/js/hotels/hotel-search-form.js"></script>
+    <script src="/app/js/hotels/hotel-search-form.js"></script>
     <script>
         hotelSearchForm.children = '{{ old('children', 0) }}'
         hotelSearchForm.childrenAges = {!! json_encode(old('children_ages', [])) !!};

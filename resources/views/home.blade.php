@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="jumbotron">
-        <h1>Travel App</h1>
+        <h1>Travel Donkey</h1>
         <p>Find Flight and Hotel Deals</p>
         <div class="btn-group">
             <a href="{{ route('hotels.home') }}" class="btn btn-warning btn-lg">Hotels</a>

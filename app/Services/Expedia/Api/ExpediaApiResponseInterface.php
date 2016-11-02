@@ -5,27 +5,38 @@ interface ExpediaApiResponseInterface
 {
     /**
      * Get the HTTP status code.
+     *
      * @return int
      */
     public function getStatus();
 
     /**
      * Set the HTTP status code.
+     *
      * @param int $status
      * @return int
      */
     public function setStatus(int $status);
 
     /**
-     * Get the data of the response.
-     * @return array
+     * Get the body of the response.
+     *
+     * @return string A json encoded string
      */
-    public function getData();
+    public function getBody();
 
     /**
-     * Set the data of the response.
-     * @param string|array $data An array or a json encoded string
+     * Get the decoded body of the response.
+     *
+     * @return array
+     */
+    public function getDecodedBody();
+
+    /**
+     * Set the body of the response.
+     * 
+     * @param string $body A json encoded string
      * @return $this
      */
-    public function setData($data);
+    public function setBody($body);
 }
